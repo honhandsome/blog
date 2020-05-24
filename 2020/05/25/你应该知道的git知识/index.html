@@ -20,19 +20,21 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="前言： 本文主要讲述搭建blog过程中需要了解的Git相关知识，包括以下内容：  Git工作流程 什么是裸仓库 什么是工作目录 git自定义钩子 在服务器上搭建git 推送到多个远程托管服务器   首先先来明确几个概念： 根据初始化的参数不同，Git分为两种仓库，普通仓库git init和裸仓库git init --bare。 裸仓库使用 git init –bare  可以创建一个裸仓库，裸仓库">
+  <meta name="description" content="普通仓库：  The working tree is a single checkout of one version of the project. These files are pulled out of the compressed database in the Git directory and placed on disk for you to use or modify. The">
 <meta property="og:type" content="article">
-<meta property="og:title" content="blog搭建过程之Git篇">
-<meta property="og:url" content="http://yoursite.com/2020/04/27/blog%E6%90%AD%E5%BB%BA%E8%BF%87%E7%A8%8B%E4%B9%8BGit%E7%AF%87/index.html">
+<meta property="og:title" content="你应该知道的git知识">
+<meta property="og:url" content="http://yoursite.com/2020/05/25/%E4%BD%A0%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84git%E7%9F%A5%E8%AF%86/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="前言： 本文主要讲述搭建blog过程中需要了解的Git相关知识，包括以下内容：  Git工作流程 什么是裸仓库 什么是工作目录 git自定义钩子 在服务器上搭建git 推送到多个远程托管服务器   首先先来明确几个概念： 根据初始化的参数不同，Git分为两种仓库，普通仓库git init和裸仓库git init --bare。 裸仓库使用 git init –bare  可以创建一个裸仓库，裸仓库">
+<meta property="og:description" content="普通仓库：  The working tree is a single checkout of one version of the project. These files are pulled out of the compressed database in the Git directory and placed on disk for you to use or modify. The">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-04-27T07:30:22.000Z">
-<meta property="article:modified_time" content="2020-05-24T18:12:04.236Z">
+<meta property="og:image" content="http://yoursite.com/Users/chs/blog/source/_posts/%E4%BD%A0%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84git%E7%9F%A5%E8%AF%86_1.png">
+<meta property="article:published_time" content="2020-05-24T18:09:00.000Z">
+<meta property="article:modified_time" content="2020-05-24T18:28:41.079Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/Users/chs/blog/source/_posts/%E4%BD%A0%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84git%E7%9F%A5%E8%AF%86_1.png">
 
-<link rel="canonical" href="http://yoursite.com/2020/04/27/blog%E6%90%AD%E5%BB%BA%E8%BF%87%E7%A8%8B%E4%B9%8BGit%E7%AF%87/">
+<link rel="canonical" href="http://yoursite.com/2020/05/25/%E4%BD%A0%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84git%E7%9F%A5%E8%AF%86/">
 
 
 <script id="page-configurations">
@@ -45,7 +47,7 @@
   };
 </script>
 
-  <title>blog搭建过程之Git篇 | Hexo</title>
+  <title>你应该知道的git知识 | Hexo</title>
   
 
 
@@ -150,7 +152,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/27/blog%E6%90%AD%E5%BB%BA%E8%BF%87%E7%A8%8B%E4%B9%8BGit%E7%AF%87/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/25/%E4%BD%A0%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84git%E7%9F%A5%E8%AF%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -163,7 +165,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          blog搭建过程之Git篇
+          你应该知道的git知识
         </h1>
 
         <div class="post-meta">
@@ -172,16 +174,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2020-04-27 15:30:22" itemprop="dateCreated datePublished" datetime="2020-04-27T15:30:22+08:00">2020-04-27</time>
+              <time title="Created: 2020-05-25 02:09:00 / Modified: 02:28:41" itemprop="dateCreated datePublished" datetime="2020-05-25T02:09:00+08:00">2020-05-25</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-25 02:12:04" itemprop="dateModified" datetime="2020-05-25T02:12:04+08:00">2020-05-25</time>
-              </span>
 
           
 
@@ -194,43 +190,19 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h3><blockquote>
-<p><strong>本文主要讲述搭建blog过程中需要了解的Git相关知识，包括以下内容：</strong></p>
-<ul>
-<li>Git工作流程</li>
-<li>什么是裸仓库</li>
-<li>什么是工作目录</li>
-<li>git自定义钩子</li>
-<li>在服务器上搭建git</li>
-<li>推送到多个远程托管服务器</li>
-</ul>
+        <h4 id="普通仓库："><a href="#普通仓库：" class="headerlink" title="普通仓库："></a>普通仓库：</h4><p><img src="/Users/chs/blog/source/_posts/%E4%BD%A0%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84git%E7%9F%A5%E8%AF%86_1.png" alt=""></p>
+<blockquote>
+<p>The <code>working tree</code> is a single checkout of one version of the project. These files are pulled out of the compressed database in the Git directory and placed on disk for you to use or modify.</p>
+<p>The <code>staging area</code> is a file, generally contained in your Git directory, that stores information about what will go into your next commit. Its technical name in Git parlance is the “index”, but the phrase “staging area” works just as well.</p>
+<p>The <code>Git directory</code> is where Git stores the metadata and object database for your project. This is the most important part of Git, and it is what is copied when you <em>clone</em> a repository from another computer.</p>
+<p>The basic Git workflow goes something like this:</p>
+<ol>
+<li>You modify files in your working tree.</li>
+<li>You selectively stage just those changes you want to be part of your next commit, which adds <em>only</em> those changes to the staging area.</li>
+<li>You do a commit, which takes the files as they are in the staging area and stores that snapshot permanently to your Git directory.</li>
+</ol>
 </blockquote>
-<p>首先先来明确几个概念：</p>
-<p>根据初始化的参数不同，Git分为两种仓库，普通仓库<code>git init</code>和裸仓库<code>git init --bare</code>。</p>
-<p>裸仓库<br>使用 git init –bare <repo> 可以创建一个裸仓库，裸仓库不包含工作区。</p>
-<p>结论：在初始化远程仓库时最好使用 git –bare init 而不要使用git init。<br>如果使用了git init初始化，则远程仓库的目录下，也包含work tree，当本地仓库向远程仓库push时, 如果远程仓库正在push的分支上（如果当时不在push的分支，就没有问题）, 那么push后的结果不会反应在work tree上, 也即在远程仓库的目录下对应的文件还是之前的内容，必须得使用git reset –hard才能看到push后的内容。</p>
-<h4 id="裸仓库："><a href="#裸仓库：" class="headerlink" title="裸仓库："></a>裸仓库：</h4><p>裸仓库，顾名思义也就是只有git没有工作目录的仓库。一般来说结尾带 .git 的仓库习惯约定是裸仓库，即.git文件夹。</p>
-<p>它可以作为服务器git仓库，通俗的讲就是git  clone的对象。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ ls blog.git</span><br><span class="line">HEAD</span><br><span class="line">config</span><br><span class="line">description</span><br><span class="line">hooks</span><br><span class="line">info</span><br><span class="line">objects</span><br><span class="line">packed-refs</span><br><span class="line">refs</span><br></pre></td></tr></table></figure>
-
-<p>显然我们的blog.git仓库中就没有工作目录。</p>
-<p>如何创建裸仓库？  git init –bare</p>
-<p>2.什么是工作目录<br>裸仓库指.git文件夹，工作目录指除.git文件夹外的其他文件</p>
-<p>使用场景：<br>本地将修改好的代码上传到远程裸仓库<br>裸仓库获取到代码后，通过钩子生成工作目录，放置在其他路径下<br>服务器再对工作目录进行操作，比如nginx对静态文件进行托管</p>
-<p>也就是说实际上我们的blog是指向的工作目录中的文件</p>
-<p>3.git自定义钩子</p>
-<p>在.git/hooks文件夹下新建post-receive文件</p>
-<p>$ vim post-receive<br>添加如下内容</p>
-<p>#!/bin/sh</p>
-<p>git –work-tree=工作目录 –git-dir=裸仓库 checkout -f<br>授予执行权限</p>
-<p>$ sudo chmod +x post-receive</p>
-<p>总结 </p>
-<p>后续<br><a href="https://git-scm.com/book/zh/v2/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84-Git-%E9%85%8D%E7%BD%AE%E6%9C%8D%E5%8A%A1%E5%99%A8" target="_blank" rel="noopener">https://git-scm.com/book/zh/v2/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84-Git-%E9%85%8D%E7%BD%AE%E6%9C%8D%E5%8A%A1%E5%99%A8</a></p>
-<p>参考<br><a href="https://zj-git-guide.readthedocs.io/zh_CN/latest/advanced/%E5%B7%A5%E4%BD%9C%E7%9B%AE%E5%BD%95%E5%92%8C%E8%A3%B8%E4%BB%93%E5%BA%93%E5%88%86%E7%A6%BB/" target="_blank" rel="noopener">https://zj-git-guide.readthedocs.io/zh_CN/latest/advanced/%E5%B7%A5%E4%BD%9C%E7%9B%AE%E5%BD%95%E5%92%8C%E8%A3%B8%E4%BB%93%E5%BA%93%E5%88%86%E7%A6%BB/</a><br><a href="https://git-scm.com/book/zh/v2/%E8%87%AA%E5%AE%9A%E4%B9%89-Git-Git-%E9%92%A9%E5%AD%90" target="_blank" rel="noopener">https://git-scm.com/book/zh/v2/%E8%87%AA%E5%AE%9A%E4%B9%89-Git-Git-%E9%92%A9%E5%AD%90</a></p>
-<h2 id="Git-钩子"><a href="#Git-钩子" class="headerlink" title="Git 钩子"></a>Git 钩子</h2><p>Git 能在特定的重要动作发生时触发自定义脚本。 钩子都被存储在 <code>hooks</code> 子目录中，即 <code>blog.git/hooks</code>。</p>
-<h4 id="post-receive"><a href="#post-receive" class="headerlink" title="post-receive"></a><code>post-receive</code></h4><p><code>post-receive</code> 挂钩在整个Git提交结束后运行，可以用来更新服务或者通知用户等。该脚本无法终止推送进程。</p>
-<p>参考资料：</p>
-<p><a href="[https://git-scm.com/book/zh/v2/%E8%87%AA%E5%AE%9A%E4%B9%89-Git-Git-%E9%92%A9%E5%AD%90](https://git-scm.com/book/zh/v2/自定义-Git-Git-钩子)">自定义 Git - Git 钩子</a></p>
+<p>对于普通仓库而言，有三个部分组成，<code>Git directory</code>,  <code>working tree</code>,  <code>staging area</code>(<code>Git 仓库</code>、<code>工作目录</code>以及<code>暂存区域</code>)。特别值得一提的是，<code>工作目录</code>还拥有项目的某个版本独立提取出来的内容，所以<strong>普通仓库默认配置下不允许接受来自其他克隆仓库的提交</strong>。</p>
 
     </div>
 
@@ -246,13 +218,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/04/06/hello-amazing-chs/" rel="prev" title="Hello, Amazing Chs!">
-      <i class="fa fa-chevron-left"></i> Hello, Amazing Chs!
+    <a href="/2020/04/27/blog%E6%90%AD%E5%BB%BA%E8%BF%87%E7%A8%8B%E4%B9%8BGit%E7%AF%87/" rel="prev" title="blog搭建过程之Git篇">
+      <i class="fa fa-chevron-left"></i> blog搭建过程之Git篇
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/05/25/%E4%BD%A0%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84git%E7%9F%A5%E8%AF%86/" rel="next" title="你应该知道的git知识">
-      你应该知道的git知识 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -311,7 +280,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言："><span class="nav-number">1.</span> <span class="nav-text">前言：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#裸仓库："><span class="nav-number">1.1.</span> <span class="nav-text">裸仓库：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git-钩子"><span class="nav-number"></span> <span class="nav-text">Git 钩子</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#post-receive"><span class="nav-number">0.1.</span> <span class="nav-text">post-receive</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#普通仓库："><span class="nav-number">1.</span> <span class="nav-text">普通仓库：</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
